@@ -12,6 +12,6 @@ public interface AdminServices {
 
     public SurveyResult calculateEachAnswerAverage(int surveyId);
 
-    public Double calculayeSurveyRating(int surveyId);
+    public Double calculateSurveyRating(int surveyId,Map<Integer,Double> eachQuestionAvgResponse);
 
 }

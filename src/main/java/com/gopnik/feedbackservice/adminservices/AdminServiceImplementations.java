@@ -26,9 +26,11 @@ public class AdminServiceImplementations implements AdminServices{
         for(Question q : s.getQuestionList())
         {
             int i = 0;
+            //System.out.println("Question -> " + q.getQuestionName());
             for(SurveyResponse sr : surveyResponseList){
                 int sumOfWeightageOfEachUser = 0;
                 Option selectedOption = sr.getSurveyAnswers().get(i).getSelectedOption();
+                //System.out.println("33 ->" + selectedOption.getWeightage());
                 sumOfWeightageOfEachUser += selectedOption.getWeightage();
                 eachResponseWeightageMap.put(q.getQuestionId(),sumOfWeightageOfEachUser);
             }
@@ -42,29 +44,26 @@ public class AdminServiceImplementations implements AdminServices{
         for(Integer question : eachResponseWeightageMap.keySet())
         {
             Double eachAnswerAverage = eachResponseWeightageMap.get(question).doubleValue() / noOfUsersAttempted;
+            System.out.println(eachAnswerAverage);
             eachQuestionAvgResponse.put(question,eachAnswerAverage);
         }
         return buildSurveyResult(surveyId,eachQuestionAvgResponse);
     }
 
     private SurveyResult buildSurveyResult(int surveyId,Map<Integer,Double> eachQuestionAvgResponse) {
-
-        Double surveyRating = null;
-        for(Integer question : eachQuestionAvgResponse.keySet()){
-            surveyRating += eachQuestionAvgResponse.get(question);
-        }
-
         return SurveyResult.builder()
                 .surveyId(surveyId)
-                .surveyRating(surveyRating)
+                .surveyRating(calculateSurveyRating(surveyId,eachQuestionAvgResponse))
                 .answersAvg(eachQuestionAvgResponse)
                 .build();
     }
 
     @Override
-    public Double calculayeSurveyRating(int surveyId) {
-        return null;
+    public Double calculateSurveyRating(int surveyId,Map<Integer,Double> eachQuestionAvgResponse) {
+        Double surveyRating = 0d;
+        for(Integer question : eachQuestionAvgResponse.keySet()) {
+            surveyRating += eachQuestionAvgResponse.get(question);
+        }
+        return surveyRating;
     }
-
-
 }
