@@ -2,6 +2,7 @@ package com.gopnik.feedbackservice.controller;
 
 import com.gopnik.feedbackservice.adminservices.AdminServiceImplementations;
 import com.gopnik.feedbackservice.models.Survey;
+import com.gopnik.feedbackservice.models.SurveyResponse;
 import com.gopnik.feedbackservice.models.SurveyResult;
 import com.gopnik.feedbackservice.virtualdaoservices.SurveyDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,13 @@ public class AdminController {
         return adminServiceImplementations.createSurvey(survey);
     }
 
-    @GetMapping("/viewSurveyResponse")
+    @GetMapping("/viewSurveyResult")
     public SurveyResult getSurveyResult(@RequestParam int surveyId){
         return adminServiceImplementations.calculateEachAnswerAverage(surveyId);
+    }
+
+    @GetMapping("/viewSurveyResponse")
+    public SurveyResponse getSurveyResponse(@RequestParam int userId){
+        return adminServiceImplementations.getSurveyResponseByUser(userId);
     }
 }

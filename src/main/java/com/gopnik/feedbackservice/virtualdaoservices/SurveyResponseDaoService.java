@@ -26,6 +26,10 @@ public class SurveyResponseDaoService {
         responseCount++;
     }
 
+    public static SurveyResponse getSurveyReponseById(int userId){
+        return responseMap.get(userId);
+    }
+
 
 
 

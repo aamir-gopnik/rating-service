@@ -38,6 +38,11 @@ public class AdminServiceImplementations implements AdminServices{
         return calculateEachAnswerAverage(surveyId,eachResponseWeightageMap);
     }
 
+    @Override
+    public SurveyResponse getSurveyResponseByUser(int userId) {
+        return SurveyResponseDaoService.getSurveyReponseById(userId);
+    }
+
     private SurveyResult calculateEachAnswerAverage(int surveyId,Map<Integer,Integer> eachResponseWeightageMap){
         Map<Integer,Double> eachQuestionAvgResponse = new HashMap<>();
         Double noOfUsersAttempted = (double) SurveyResponseDaoService.responseCount;
