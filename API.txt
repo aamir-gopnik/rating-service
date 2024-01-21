@@ -1,0 +1,141 @@
+Create survey curl postman
+*********************************************************************************************************************
+
+
+POST - http://localhost:8010/admin/createSurvey
+GET - http://localhost:8010/user/getSurvey/1
+----------------------------------------------------------------------
+{
+    "surveyId": "1",
+    "surveyName": "Interview Feedback",
+    "questionList": [
+        {
+            "questionId": "1",
+            "questionName": "How well did you do this round?",
+            "optionSet": [
+                {
+                    "optionId": "1",
+                    "optionName": "Very Poor",
+                    "weightage": "1"
+                },
+                {
+                    "optionId": "2",
+                    "optionName": "Poor",
+                    "weightage": "2"
+                },
+                {
+                    "optionId": "3",
+                    "optionName": "Average",
+                    "weightage": "3"
+                },
+                {
+                    "optionId": "4",
+                    "optionName": "Good",
+                    "weightage": "4"
+                },
+                {
+                    "optionId": "5",
+                    "optionName": "Very Good",
+                    "weightage": "5"
+                }
+            ]
+        },
+        {
+            "questionId": "2",
+            "questionName": "How difficult is the question ?",
+            "optionSet": [
+                {
+                    "optionId": "1",
+                    "optionName": "Easy",
+                    "weightage": "1"
+                },
+                {
+                    "optionId": "2",
+                    "optionName": "Ok",
+                    "weightage": "2"
+                },
+                {
+                    "optionId": "3",
+                    "optionName": "Difficult",
+                    "weightage": "3"
+                },
+                {
+                    "optionId": "4",
+                    "optionName": "VeryDifficult",
+                    "weightage": "4"
+                }
+            ]
+        }
+    ],
+    "noOfQuestions": "2"
+}
+
+
+*********************************************************************************************************************
+UserSurveyResponse
+*********************************************************************************************************************
+
+POST - http://localhost:8010/user/surveyResponse
+---------------------------------------------------------------------------
+
+{
+    "userId": "121",
+    "surveyResponse": {
+        "responseId": "1",
+        "surveyId": "1",
+        "surveyAnswers": [
+            {
+                "questionId": "1",
+                "selectedOption": {
+                    "optionId": "4"
+                }
+            },
+            {
+                "questionId": "2",
+                "selectedOption": {
+                    "optionId": "4"
+                }
+            }
+        ]
+    }
+}
+
+*********************************************************************************************************************
+
+{
+    "userId": "123",
+    "surveyResponse": {
+        "responseId": "2",
+        "surveyId": "1",
+        "surveyAnswers": [
+            {
+                "questionId": "1",
+                "selectedOption": {
+                    "optionId": "4"
+                }
+            },
+            {
+                "questionId": "2",
+                "selectedOption": {
+                    "optionId": "4"
+                }
+            }
+        ]
+    }
+}
+
+*********************************************************************************************************************
+Survey Result - GET - http://localhost:8010/admin/viewSurveyResult?surveyId=1
+*********************************************************************************************************************
+{
+    "surveyId": 1,
+    "noOfResponses": null,
+    "answersAvg": {
+        "1": 0.75,
+        "2": 0.75
+    },
+    "surveyRating": 1.5
+}
+
+
+
